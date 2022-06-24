@@ -11,11 +11,11 @@ spec:
   template:
     metadata:
       labels:
-        bb: web
+        name: chat-broadcast-see-service
     spec:
       containers:
       - name: chat-broadcast-see-service
-        image: chat_broadcast_see_service:latest
+        image: rsargsyan/chat_broadcast_see:latest
 ---
 apiVersion: v1
 kind: Service

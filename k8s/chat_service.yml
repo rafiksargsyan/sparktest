@@ -11,11 +11,11 @@ spec:
   template:
     metadata:
       labels:
-        bb: web
+        name: chat-service
     spec:
       containers:
       - name: chat-service
-        image: chat_service:latest
+        image: rsargsyan/chat_service:latest
 ---
 apiVersion: v1
 kind: Service

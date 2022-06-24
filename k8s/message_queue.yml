@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: message-queue
-        image: message_queue:latest
+        image: rsargsyan/message_queue:latest
 ---
 apiVersion: v1
 kind: Service
