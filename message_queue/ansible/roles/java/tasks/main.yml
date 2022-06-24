@@ -1,0 +1,9 @@
+---
+# file: roles/common/tasks/main.yml
+- name: Install openjdk-8 latest
+  apt:
+    name:         "{{ item }}"
+    update_cache: yes
+    state:        latest
+  with_items:
+    - openjdk-8-jdk

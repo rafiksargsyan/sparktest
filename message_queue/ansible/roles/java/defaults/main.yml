@@ -1,0 +1,7 @@
+---
+java_version: 8
+java_cache_valid_time: 3600
+java_home: "/usr/lib/jvm/java-{{ java_version }}-openjdk-amd64"
+java_os_supported: yes
+java_state: latest
+java_set_as_default: yes

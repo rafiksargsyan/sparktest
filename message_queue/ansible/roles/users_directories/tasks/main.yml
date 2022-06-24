@@ -1,0 +1,14 @@
+---
+- name: Create {{app_group}} group
+  group: name={{app_group}}
+
+- name: Create {{app_user}} user
+  user: name={{app_user}} group={{app_group}} createhome=yes home=/opt/{{app_user}}/ shell=/sbin/nologin state=present
+
+- name: Create {{app_group}} root directory
+  file: path=/opt/{{app_group}}/ mode="u=rwx,g=rwx,o=rwx" owner={{app_user}} group={{app_group}} state=directory
+
+- name: Create {{app_group}} directories
+  file: path={{item}} mode="u=rwx,g=rwx,o=rwx" owner={{app_user}} group={{app_group}} state=directory
+  with_items:
+    - /opt/affinitas_chat/apollomq_1.7.1
