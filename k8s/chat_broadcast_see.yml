@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-broadcast-see-service 
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: chat-broadcast-see-service
+  template:
+    metadata:
+      labels:
+        bb: web
+    spec:
+      containers:
+      - name: chat-broadcast-see-service
+        image: chat_broadcast_see_service:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-broadcast-see-service
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    name: chat-broadcast-see-service
+  ports:
+  - port: 8081
+    targetPort: 8081

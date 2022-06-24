@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: message-queue 
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: message-queue
+  template:
+    metadata:
+      labels:
+        name: message-queue
+    spec:
+      containers:
+      - name: message-queue
+        image: message_queue:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: message_queue
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    name: message_queue
+  ports:
+  - port: 61613
+    targetPort: 61613

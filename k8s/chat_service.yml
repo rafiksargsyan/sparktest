@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service 
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: chat-service
+  template:
+    metadata:
+      labels:
+        bb: web
+    spec:
+      containers:
+      - name: chat-service
+        image: chat_service:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-service
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    name: chat-service
+  ports:
+  - port: 8080
+    targetPort: 8080
