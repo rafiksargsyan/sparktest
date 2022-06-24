@@ -20,12 +20,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: message_queue
+  name: message-queue
   namespace: default
 spec:
   type: ClusterIP
   selector:
-    name: message_queue
+    name: message-queue
   ports:
   - port: 61613
     targetPort: 61613
