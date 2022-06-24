@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: chat-broadcast-see-service
-        image: rsargsyan/chat_broadcast_see:latest
+        image: rsargsyan/chat_broadcast_sse:latest
 ---
 apiVersion: v1
 kind: Service
