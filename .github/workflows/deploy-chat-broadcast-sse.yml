@@ -1,0 +1,22 @@
+name: Deploy chat broadcast service
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'chat_broadcast_sse/**' ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build docker image
+        run: docker build --tag chat_broadcast_sse:${GITHAB_SHA} ./chat_broadcast_sse
+
+      - name: push to repository
+        run: docker push rsargsyan/chat_broadcast_sse:${GITHAB_SHA}
+
+      - name: deploy to kubernetes
+        run: kubectl apply -f ./k8s/chat_broadcast_sse_service.yml
+

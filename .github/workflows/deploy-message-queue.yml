@@ -1,0 +1,22 @@
+name: Deploy message queue
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'message_queue/**' ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build docker image
+        run: docker build --tag message_queue:${GITHAB_SHA} ./message_queue 
+
+      - name: push to repository
+        run: docker push rsargsyan/message_queue:${GITHAB_SHA}
+
+      - name: deploy to kubernetes
+        run: kubectl apply -f ./k8s/message_queue.yml
+
