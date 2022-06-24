@@ -1,0 +1,22 @@
+name: Deploy chat service
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'chat_service/**' ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build docker image
+        run: docker build --tag chat_service:${GITHAB_HASH} ./chat_service 
+
+      - name: push to repository
+        run: docker push chat_service:${GITHAB_HASH}
+
+      - name: deploy to kubernetes
+        run: kubectl apply -f ./k8s/chat-service.yml
+
